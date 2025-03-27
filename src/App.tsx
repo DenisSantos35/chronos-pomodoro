@@ -36,7 +36,10 @@ import './styles/global.css';
 export function App() {
   return (
     <>
-      <Heading />
+      <Heading attr={123} attr2={'String'}>
+        Olá mundo!
+      </Heading>
+      <Heading>Hellow World!</Heading>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit,
         explicabo velit? Rem accusantium odit provident laudantium magni qui
