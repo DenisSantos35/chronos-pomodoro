@@ -27,13 +27,16 @@
 // }
 
 // export { App };
+
+import { Heading } from './components/Heading';
+
 import './styles/theme.css';
 import './styles/global.css';
 
 export function App() {
   return (
     <>
-      <h1>Hello World! (App)</h1>
+      <Heading />
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit,
         explicabo velit? Rem accusantium odit provident laudantium magni qui
