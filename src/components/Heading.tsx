@@ -1,28 +1,13 @@
 import styles from './Heading.module.css';
 
-export function Heading(props) {
-  console.log(props);
-  /*
-  ** css modules
-  console.log(styles);
-  colocar duas classes no mesmo componente
-  const classes = `${styles.heading} ${styles.cyan}`
-  <h1 className={classes}>Hello World! (App)</h1>
-  ou
-  <h1 className={`${styles.heading} ${styles.cyan}`}>Hello World! (App)</h1>*/
+type HeadingProps = {
+  children: React.ReactNode;
+};
 
-  /*
-  ** props do componente
-    <h1 className={styles.heading}>
-        {props.children} {props.attr} {props.attr2}
-    </h1>
-
-   */
+export function Heading({ children }: HeadingProps) {
   return (
     <>
-      <h1 className={styles.heading}>
-        {props.children} {props.attr} {props.attr2}
-      </h1>
+      <h1 className={styles.heading}>{children}</h1>
     </>
   );
 }

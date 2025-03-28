@@ -67,3 +67,29 @@ export default tseslint.config({
 - HeaderHeading => Palavra composta a cada palavra a primeira letra coloca se
   maiuscula
 - ExemploDeComponente
+
+/\* \*\* css modules console.log(styles); colocar duas classes no mesmo
+componente const classes = `${styles.heading} ${styles.cyan}`
+
+  <h1 className={classes}>Hello World! (App)</h1>
+  ou
+  <h1 className={`${styles.heading} ${styles.cyan}`}>Hello World! (App)</h1>*/
+
+/\* \*\* props do componente <h1 className={styles.heading}> {props.children}
+{props.attr} {props.attr2} </h1>
+
+\*/
+
+// export const App = () => { // return ( // <div> // <h1>Hello World!
+(App)</h1> // <p> // Lorem ipsum dolor sit amet consectetur adipisicing elit.
+Impedit, // explicabo velit? Rem accusantium odit provident laudantium magni qui
+// quam doloribus, nobis officiis laborum doloremque, corrupti deserunt // natus
+placeat praesentium iure. // </p> // </div> // ); // };
+
+// function App() { // return ( // <div> // <h1>Hello World! (App)</h1> // <p>
+// Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, //
+explicabo velit? Rem accusantium odit provident laudantium magni qui // quam
+doloribus, nobis officiis laborum doloremque, corrupti deserunt // natus placeat
+praesentium iure. // </p> // </div> // ); // }
+
+// export { App };
