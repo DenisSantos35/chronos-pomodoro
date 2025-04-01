@@ -3,11 +3,10 @@
   align-items: center;
   justify-content: center;
   gap: 2.4rem;
-  padding: 3.2rem;
+  padding-top: 3.2rem;
 }
 
 .logoLink {
-  background: red;
   /*icone acima texto abaixo*/
   display: flex;
   flex-direction: column; /*deixa o item em coluna*/
@@ -22,7 +21,7 @@
 }
 
 .logoLink:hover {
-  filter: brightness(50%); /*ao passar o mouse escurece o item em 80%*/
+  filter: brightness(80%); /*ao passar o mouse escurece o item em 80%*/
 }
 
 .logoLink svg {

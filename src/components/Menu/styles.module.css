@@ -1,0 +1,28 @@
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem; /*espaço entre itens*/
+}
+
+.menuLink {
+  /*icone acima texto abaixo*/
+  display: inline-flex; /*deixa o elmento em linha*/
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: var(--text-over-primary);
+  transition: all 0.1s ease-in-out; /*transição de todo componente, tempo 0.1segundo e modo de transição ease-in-out*/
+  padding: 1.2rem;
+  border-radius: 0.8rem;
+}
+
+.menuLink:hover {
+  filter: brightness(50%); /*ao passar o mouse escurece o item em 80%*/
+}
+
+.menuLink svg {
+  /*TimerIcon é transformado em svg no  css*/
+  width: 2.4rem;
+  height: 2.4rem;
+}
