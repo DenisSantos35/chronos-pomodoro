@@ -1,0 +1,32 @@
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4rem;
+  padding: 3.2rem;
+}
+
+.logoLink {
+  background: red;
+  /*icone acima texto abaixo*/
+  display: flex;
+  flex-direction: column; /*deixa o item em coluna*/
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem; /*espaço entre itens*/
+  font-size: 4.2rem;
+  font-weight: bold;
+  text-decoration: none; /*tira decorações de textos*/
+  color: var(--primary);
+  transition: all 0.1s ease-in-out; /*transição de todo componente, tempo 0.1segundo e modo de transição ease-in-out*/
+}
+
+.logoLink:hover {
+  filter: brightness(50%); /*ao passar o mouse escurece o item em 80%*/
+}
+
+.logoLink svg {
+  /*TimerIcon é transformado em svg no  css*/
+  width: 6.4rem;
+  height: 6.4rem;
+}
