@@ -33,7 +33,6 @@ export function Menu() {
   }
 
   useEffect(() => {
-    console.log(`theme mudou para ${theme}`);
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
@@ -41,7 +40,6 @@ export function Menu() {
   return (
     <>
       <nav className={styles.menu}>
-        <h1>{theme}</h1>
         <a
           className={styles.menuLink}
           href='#'
