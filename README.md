@@ -110,3 +110,23 @@ dependencia for alterado
       console.log('olha, este componente será atualizado');
     };
   }, [theme]); -->
+
+   <!-- //// Há trez formas de utiliza use effect.
+  //só o array => Executado toda vez que o componete e renderiado
+  // useEffect(() => {
+  //   console.log('useEffect sem dependências', Date.now());
+  // });
+  ////com array de dependencias vazio => Executado quando o componente e montado pela primeira vez
+  // useEffect(() => {
+  //   console.log('useEffect com array de dependencias vazio', Date.now());
+  // }, []);
+  // //com array com dependencia => Executa toda vez que o valor da dependencia for alterado -->
+
+  <!-- useEffect(() => {
+    console.log(`theme mudou para ${theme}`);
+    document.documentElement.setAttribute('data-theme', theme);
+    // Este retorno antes da montagem do proximo compontente limpa a sujeira anterior para depois montar o novo componente, cleanUp
+    return () => {
+      console.log('olha, este componente será atualizado');
+    };
+  }, [theme]); -->

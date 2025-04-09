@@ -1,40 +1,43 @@
-import { HistoryIcon, HouseIcon, SettingsIcon, SunIcon } from 'lucide-react';
+import {
+  HistoryIcon,
+  HouseIcon,
+  MoonIcon,
+  SettingsIcon,
+  SunIcon,
+} from 'lucide-react';
 import styles from './styles.module.css';
 import { useState, useEffect } from 'react';
 
 type AvailablesThemes = 'dark' | 'light';
 
 export function Menu() {
-  const [theme, setTheme] = useState<AvailablesThemes>('dark');
+  const [theme, setTheme] = useState<AvailablesThemes>(() => {
+    const storageTheme =
+      (localStorage.getItem('theme') as AvailablesThemes) ?? 'dark';
+    return storageTheme;
+  });
+
+  const nextThemeIcon = {
+    dark: <SunIcon />,
+    light: <MoonIcon />,
+  };
 
   function handleThemeChange(
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) {
-    event.preventDefault(); //Não segue o link ptevine os eventos
+    event.preventDefault();
     setTheme(prevTheme => {
       const nextTheme = prevTheme === 'dark' ? 'light' : 'dark';
       return nextTheme;
     });
-    //document.documentElement.setAttribute('data-theme', theme);
   }
-  //// Há trez formas de utiliza use effect.
-  //só o array => Executado toda vez que o componete e renderiado
-  // useEffect(() => {
-  //   console.log('useEffect sem dependências', Date.now());
-  // });
-  ////com array de dependencias vazio => Executado quando o componente e montado pela primeira vez
-  // useEffect(() => {
-  //   console.log('useEffect com array de dependencias vazio', Date.now());
-  // }, []);
-  // //com array com dependencia => Executa toda vez que o valor da dependencia for alterado
+
   useEffect(() => {
     console.log(`theme mudou para ${theme}`);
     document.documentElement.setAttribute('data-theme', theme);
-    // Este retorno antes da montagem do proximo compontente limpa a sujeira anterior para depois montar o novo componente, cleanUp
-    return () => {
-      console.log('olha, este componente será atualizado');
-    };
+    localStorage.setItem('theme', theme);
   }, [theme]);
+
   return (
     <>
       <nav className={styles.menu}>
@@ -70,7 +73,7 @@ export function Menu() {
           title='Mudar Tema'
           onClick={handleThemeChange}
         >
-          <SunIcon />
+          {nextThemeIcon[theme]}
         </a>
       </nav>
     </>
