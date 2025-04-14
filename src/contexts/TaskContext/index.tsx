@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { TaskStateModel } from '../../models/TaskStateModel';
 
 // modelo dos dados do meu contexto
@@ -38,8 +38,9 @@ type TaskContextProviderProps = {
 };
 
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
+  const [state, setState] = useState<TaskStateModel>(initialState);
   return (
-    <TaskContext.Provider value={initialContextValue}>
+    <TaskContext.Provider value={{ state, setState }}>
       {children}
     </TaskContext.Provider>
   );
