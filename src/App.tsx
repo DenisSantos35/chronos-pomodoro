@@ -3,6 +3,7 @@ import './styles/theme.css';
 import './styles/global.css';
 import { TaskStateModel } from './models/TaskStateModel';
 import { useState } from 'react';
+import { TaskContextProvider } from './contexts/TaskContext';
 // import { NotFound } from './pages/NotFound';
 // import { AboutPomodoro } from './pages/AboutPomodoro';
 
@@ -22,7 +23,9 @@ export function App() {
   const [state, setState] = useState<TaskStateModel>(initialState);
   console.log('state', state);
   console.log('state.tasks', setState);
-  return <Home />;
-  // <AboutPomodoro />;
-  // <NotFound />;
+  return (
+    <TaskContextProvider>
+      <Home />
+    </TaskContextProvider>
+  );
 }
