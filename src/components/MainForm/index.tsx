@@ -2,11 +2,13 @@ import { PlayCircleIcon } from 'lucide-react';
 import { Cycles } from '../Cycles';
 import { DefaultButton } from '../DefaultButton';
 import { DefaultInput } from '../DefaultInput';
+import { useState } from 'react';
 
 export function MainForm() {
+  const [taskName, setTaskName] = useState('');
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log('Deu certo');
+    console.log(`Deu certo ${taskName}`);
   }
   return (
     <form onSubmit={handleCreateNewTask} className='form' action=''>
@@ -16,6 +18,10 @@ export function MainForm() {
           type='text'
           labelText='task'
           placeholder='Digite algo'
+          //input controlado é necessário passar um value e um onChange
+          //o value é o valor do input e o onChange é a função que vai atualizar o valor do input
+          value={taskName}
+          onChange={event => setTaskName(event.target.value)}
         />
       </div>
       <div className='formRow'>
