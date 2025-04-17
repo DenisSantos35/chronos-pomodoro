@@ -6,8 +6,10 @@ import { useContext, useRef } from 'react';
 import { TaskModel } from '../../models/TaskModel';
 import { TaskContext } from '../../contexts/TaskContext/TaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
+import { getNextCycleType } from '../../utils/getNextCycleType';
 
 export function MainForm() {
+  //utilizando o contexto
   const { state, setState } = useContext(TaskContext);
   // const [taskName, setTaskName] = useState('');
   //usando useRef para pegar o valor do input
@@ -16,6 +18,9 @@ export function MainForm() {
   //ciclos cria o próximo ciclo
   const nextCycle = getNextCycle(state.currentCycle);
   console.log('nextCycle', nextCycle);
+
+  //pegar o proximo ciclo atravé de calculo
+  const nextCycleType = getNextCycleType(nextCycle);
 
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     //previnir evento de submit
@@ -40,13 +45,13 @@ export function MainForm() {
       completeDate: null,
       interruptDate: null,
       duration: 1,
-      type: 'workTime',
+      type: nextCycleType,
     };
 
     //CONVERTER TEMPO EM SEGUNDOS
     const secondsRemaining = newTask.duration * 60;
 
-    //SETAR DADOS NA TASKSTATEMODEL
+    //SETAR DADOS NA TASKSTATEMODEL atribuindo a nova task
     setState(prevState => {
       return {
         ...prevState,
