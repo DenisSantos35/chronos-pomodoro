@@ -81,6 +81,7 @@ export function MainForm() {
           // onChange={event => setTaskName(event.target.value)}
           //pegando valor com ref
           ref={taskNameInput}
+          disabled={!!state.activeTask}
         />
       </div>
       <div className='formRow'>
