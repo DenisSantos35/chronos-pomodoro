@@ -67,7 +67,7 @@ export function MainForm() {
 
     console.log(taskName);
   }
-
+  // Interrompendo a task e zerando dados
   function handleInterruptTask() {
     setState(prevState => {
       return {
@@ -75,6 +75,12 @@ export function MainForm() {
         activeTask: null,
         secondsRemaining: 0,
         formatedSecondsRemaining: '00:00',
+        tasks: prevState.tasks.map(task => {
+          if (prevState.activeTask && prevState.activeTask.id === task.id) {
+            return { ...task, interruptDate: Date.now() };
+          }
+          return task;
+        }),
       };
     });
   }
