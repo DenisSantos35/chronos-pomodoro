@@ -14,47 +14,63 @@ type TaskContextProviderProps = {
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
   const [state, setState] = useState<TaskStateModel>(initialTaskState);
 
+  //Estado para tipagem da action do useReducer
+  //nossa action agora recebera 2 parametros em forma de objeto, type e payload.
+  type ActionType = {
+    type: string;
+    payload?: number;
+  };
+
   //Reducer é uma função que recebe state e action e retorna um state
   //Para disparar a ação do reducer é necessário ter uma função, botão ou algo que dispare.
-  const [number, dispatch] = useReducer((state, action) => {
-    console.log(action, state);
-    switch (action) {
-      case 'INCREMENT':
-        return state + 1;
-      case 'DECREMENT':
-        return state - 1;
-      case 'CLEAR':
-        return (state = 0);
-    }
-    return state; //estado atual, não é alterado.
-  }, 0);
+  const [myState, dispatch] = useReducer(
+    (state, action: ActionType) => {
+      console.log(action, state);
+
+      switch (action.type) {
+        case 'INCREMENT': {
+          if (!action.payload) return state;
+          return {
+            ...state,
+            secondsReamning: state.secondsReamning + action.payload,
+          };
+        }
+        case 'DECREMENT': {
+          if (!action.payload) return state;
+          return {
+            ...state,
+            secondsReamning: state.secondsReamning - action.payload,
+          };
+        }
+        case 'CLEAR': {
+          // if (!action.payload) return state;
+          return {
+            secondsReamning: 0,
+          };
+        }
+      }
+      return state; //estado atual, não é alterado.
+    },
+    { secondsReamning: 0 },
+  );
   //verificar mudança de estado do state
   // useEffect(() => {
   //   console.log(state);
   // }, [state]);
 
-  function handleIncrement() {
-    //toda vez que é chamado o dispatch, é chamado o useReducer e um valor é passado para action
-    //com um switch é verificado se a action é = ao valor que esta sendo passado,
-    //caso seja retorna se um novo estado,
-    //caso nao seja retorna o estado atual.
-    dispatch('INCREMENT');
-  }
-
-  function handleDecrement() {
-    dispatch('DECREMENT');
-  }
-
-  function handleClear() {
-    dispatch('CLEAR');
-  }
-
   return (
     <TaskContext.Provider value={{ state, setState }}>
-      <h1>O numero é: {number}</h1>
-      <button onClick={handleIncrement}>Incrementar</button>
-      <button onClick={handleDecrement}>Decrementar</button>
-      <button onClick={handleClear}>Clear</button>
+      <h1>O estado é: {JSON.stringify(myState)}</h1>
+      <button onClick={() => dispatch({ type: 'INCREMENT', payload: 10 })}>
+        Incrementar + 10
+      </button>
+      <button onClick={() => dispatch({ type: 'INCREMENT', payload: 20 })}>
+        Incrementar + 20
+      </button>
+      <button onClick={() => dispatch({ type: 'DECREMENT', payload: 50 })}>
+        Decrementar - 50
+      </button>
+      <button onClick={() => dispatch({ type: 'CLEAR' })}>Clear</button>
     </TaskContext.Provider>
   );
 }
