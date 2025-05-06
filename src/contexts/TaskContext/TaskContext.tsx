@@ -1,17 +1,18 @@
 import { createContext } from 'react';
 import { TaskStateModel } from '../../models/TaskStateModel';
 import { initialTaskState } from './initialTaskState';
+import { TaskActionModel } from './taskActions';
 
 //tipagem do contexto
 type TaskContextProps = {
   state: TaskStateModel;
-  setState: React.Dispatch<React.SetStateAction<TaskStateModel>>;
+  dispatch: React.Dispatch<TaskActionModel>;
 };
 
 // valor inicial do contexto
 const initialContextValue = {
   state: initialTaskState,
-  setState: () => {},
+  dispatch: () => {},
 };
 
 // criando o contexto

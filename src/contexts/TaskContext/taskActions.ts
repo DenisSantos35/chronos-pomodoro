@@ -21,15 +21,15 @@ export type TaskActionWithPayload =
       payload: TaskModel;
     }
   | {
-      type: TaskActionTypes.INTERRUPT_TASK;
-      payload: TaskModel;
-    }
-  | {
       type: TaskActionTypes.RESET_STATE;
     };
 
-export type TaskActionWithOutPayload = {
-  type: TaskActionTypes.RESET_STATE;
-};
+export type TaskActionWithOutPayload =
+  | {
+      type: TaskActionTypes.RESET_STATE;
+    }
+  | {
+      type: TaskActionTypes.INTERRUPT_TASK;
+    };
 
 export type TaskActionModel = TaskActionWithPayload | TaskActionWithOutPayload;

@@ -1,10 +1,10 @@
 //tipagem da children que vai receber o provider
 // o provider é um componente que vai envolver toda a aplicação
 
-import { useEffect, useState } from 'react';
-import { TaskStateModel } from '../../models/TaskStateModel';
+import { useEffect, useReducer } from 'react';
 import { initialTaskState } from './initialTaskState';
 import { TaskContext } from './TaskContext';
+import { taskReducer } from './taskReducer';
 
 // e vai fornecer o contexto para todos os componentes filhos
 type TaskContextProviderProps = {
@@ -12,7 +12,7 @@ type TaskContextProviderProps = {
 };
 
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
-  const [state, setState] = useState<TaskStateModel>(initialTaskState);
+  const [state, dispatch] = useReducer(taskReducer, initialTaskState);
 
   // verificar mudança de estado do state
   useEffect(() => {
@@ -20,7 +20,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
   }, [state]);
 
   return (
-    <TaskContext.Provider value={{ state, setState }}>
+    <TaskContext.Provider value={{ state, dispatch }}>
       {children}
     </TaskContext.Provider>
   );

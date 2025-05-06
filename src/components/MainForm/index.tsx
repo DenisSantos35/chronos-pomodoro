@@ -7,11 +7,11 @@ import { TaskModel } from '../../models/TaskModel';
 import { TaskContext } from '../../contexts/TaskContext/TaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
-import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
+import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 
 export function MainForm() {
   //utilizando o contexto
-  const { state, setState } = useContext(TaskContext);
+  const { state, dispatch } = useContext(TaskContext);
   // const [taskName, setTaskName] = useState('');
   //usando useRef para pegar o valor do input
   const taskNameInput = useRef<HTMLInputElement>(null);
@@ -49,40 +49,11 @@ export function MainForm() {
       type: nextCycleType,
     };
 
-    //CONVERTER TEMPO EM SEGUNDOS
-    const secondsRemaining = newTask.duration * 60;
-
-    //SETAR DADOS NA TASKSTATEMODEL atribuindo a nova task
-    setState(prevState => {
-      return {
-        ...prevState,
-        config: { ...prevState.config },
-        activeTask: newTask,
-        currentCycle: nextCycle,
-        secondsRemaining, //TODO:conferir
-        formatedSecondsRemaining: formatSecondsToMinutes(secondsRemaining), //TODO:conferir
-        tasks: [...prevState.tasks, newTask],
-      };
-    });
-
-    console.log(taskName);
+    dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
   }
   // Interrompendo a task e zerando dados
   function handleInterruptTask() {
-    setState(prevState => {
-      return {
-        ...prevState,
-        activeTask: null,
-        secondsRemaining: 0,
-        formatedSecondsRemaining: '00:00',
-        tasks: prevState.tasks.map(task => {
-          if (prevState.activeTask && prevState.activeTask.id === task.id) {
-            return { ...task, interruptDate: Date.now() };
-          }
-          return task;
-        }),
-      };
-    });
+    dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
   }
   return (
     <form onSubmit={handleCreateNewTask} className='form' action=''>
