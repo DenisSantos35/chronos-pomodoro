@@ -50,6 +50,21 @@ export function MainForm() {
     };
 
     dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
+
+    //criação do worker
+    const worker = new Worker(
+      new URL('../../workers/timerWorker.js', import.meta.url),
+    );
+    //envio de mensagem pelo worker
+    worker.postMessage('FAVOR'); //RESPOSTA ESPERADA => Sim, posso fazer um favor
+    worker.postMessage('FALA OI'); //RESPOSTA ESPERADA => OK, OI!
+    worker.postMessage('BLABLABLA'); //RESPOSTA ESPERADA => Não entendi
+    worker.postMessage('FECHAR'); //RESPOSTA ESPERADA => tÁ BOM, VOU FECHAR
+
+    //recebendo resposta do work
+    worker.onmessage = function (event) {
+      console.log('WORKER2 recebeu', event.data);
+    };
   }
   // Interrompendo a task e zerando dados
   function handleInterruptTask() {
