@@ -8,6 +8,7 @@ import { TaskContext } from '../../contexts/TaskContext/TaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
 import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
+import { Tips } from '../Tips';
 
 export function MainForm() {
   //utilizando o contexto
@@ -18,7 +19,6 @@ export function MainForm() {
 
   //ciclos cria o próximo ciclo
   const nextCycle = getNextCycle(state.currentCycle);
-  console.log('nextCycle', nextCycle);
 
   //pegar o proximo ciclo atravé de calculo
   const nextCycleType = getNextCycleType(nextCycle);
@@ -73,7 +73,7 @@ export function MainForm() {
         />
       </div>
       <div className='formRow'>
-        <p>Próximo intervalo é de 25 min</p>
+        <Tips />
       </div>
       {state.currentCycle > 0 && (
         <div className='formRow'>
