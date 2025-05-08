@@ -1,24 +1,25 @@
+let isRunning = false;
 self.onmessage = function (event) {
-  console.log('WORKER recebeu:', event.data);
+  if (isRunning) return;
+  // If the timer is already running, ignore the new message
+  isRunning = true;
+  // If the timer is not running, start it
+  const state = event.data;
+  // The state is the object that contains the activeTask and secondsRemaining
+  const { activeTask, secondsRemaining } = state;
+  // activeTask is the object that contains the task information
+  const endDate = activeTask.startDate + secondsRemaining * 1000;
+  console.log('endDate', new Date(endDate));
 
-  // worker responde a mensagem recebida
-  self.postMessage('Olá Para você tambem');
+  const now = Date.now();
+  let countDownSeconds = Math.ceil((endDate - now) / 1000);
 
-  switch (event.data) {
-    case 'FAVOR': {
-      self.postMessage('Sim, posso fazer um favor');
-      break;
-    }
-    case 'FALA OI': {
-      self.postMessage('OK, OI!');
-      break;
-    }
-    case 'FECHAR': {
-      self.postMessage('tÁ BOM, VOU FECHAR');
-      self.close();
-      break;
-    }
-    default:
-      self.postMessage('Não entendi');
+  function tick() {
+    self.postMessage(countDownSeconds);
+    const now = Date.now();
+    countDownSeconds = Math.floor((endDate - now) / 1000);
+
+    setTimeout(tick, 1000);
   }
+  tick();
 };

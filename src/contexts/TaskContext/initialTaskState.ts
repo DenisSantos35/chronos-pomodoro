@@ -8,8 +8,8 @@ export const initialTaskState: TaskStateModel = {
   activeTask: null,
   currentCycle: 0, // loop de 1 a 8 retornando a 1.
   config: {
-    workTime: 25,
-    shortBreakTime: 5,
-    longBreakTime: 15,
+    workTime: 1,
+    shortBreakTime: 1,
+    longBreakTime: 1,
   },
 };
