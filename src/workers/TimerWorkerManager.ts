@@ -1,3 +1,5 @@
+import { TaskStateModel } from '../models/TaskStateModel';
+
 let instance: TimerWorkerManager | null = null;
 
 export class TimerWorkerManager {
@@ -16,7 +18,7 @@ export class TimerWorkerManager {
     return instance;
   }
   // Metodo utilizado para enviar mensagens pelo worker
-  postMessage(message: any) {
+  postMessage(message: TaskStateModel) {
     this.worker.postMessage(message);
   }
   // Método para receber mensagens do worker
