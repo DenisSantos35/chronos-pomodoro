@@ -18,6 +18,8 @@ export function MainForm() {
   //usando useRef para pegar o valor do input
   const taskNameInput = useRef<HTMLInputElement>(null);
 
+  const lastTaskName = state.tasks[state.tasks.length - 1]?.name || '';
+
   //ciclos cria o próximo ciclo
   const nextCycle = getNextCycle(state.currentCycle);
 
@@ -76,6 +78,7 @@ export function MainForm() {
           //pegando valor com ref
           ref={taskNameInput}
           disabled={!!state.activeTask}
+          defaultValue={lastTaskName}
         />
       </div>
       <div className='formRow'>
