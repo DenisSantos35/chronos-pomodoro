@@ -7,9 +7,10 @@ import { MainTemplate } from '../../templates/MainTemplates';
 import { useRef } from 'react';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { showMessage } from '../../adapters/showMessage';
+import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 
 export function Settings() {
-  const { state } = useTaskContext();
+  const { state, dispatch } = useTaskContext();
   //forma de pegar dados do input
   const workTimeInput = useRef<HTMLInputElement>(null);
   const shortBreakTimeInput = useRef<HTMLInputElement>(null);
@@ -45,9 +46,14 @@ export function Settings() {
       formErrors.forEach(error => {
         showMessage.error(error);
       });
+
       return;
     }
-    console.log('SALVAR');
+    dispatch({
+      type: TaskActionTypes.CHANGE_SETTINGS,
+      payload: { workTime, shortBreakTime, longBreakTime },
+    });
+    showMessage.success('Configurações salvas');
   }
   return (
     <MainTemplate>
